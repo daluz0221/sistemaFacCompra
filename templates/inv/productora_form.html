@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+
+
+
+{% block content %}
+    
+<form action="" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+
+        {% endif %}
+            
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          
+                          {% if obj %}
+                              Editar
+                            {% else %}
+                             Nueva
+                          {% endif %}
+                             Prodcutora
+                        </div>
+                        <div class="dropdwon-divider"></div>
+                        <div class="row my-3">
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <!-- <input type="text" name="nombre" id="id_nombre" maxlength="100" required placeholder="Nombre de la productora" value="{% if obj %}{{ obj.nombre }}{% endif %}" class="form-control"> -->
+                                    {{ form.nombre }}
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <!-- <label for="id_estado">Estado</label>
+                                    <input type="checkbox" name="estado" id="id_estado" 
+                                    
+                                    {% if obj.estado %}
+                                        checked    
+                                    {% endif %}
+                                     class="form-control"> -->
+                                     {{ form.estado }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdwon-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+                                <a href="{% url 'inv:productora_list' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}
+    
+
+
+{% block js %}
+    
+{% endblock js %}
+    
