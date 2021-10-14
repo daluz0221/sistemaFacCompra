@@ -56,11 +56,7 @@
                       <input type="text" class="form-control form-control-user" id="id_username" aria-describedby="emailHelp" placeholder="Nombre de usuario" name="username">
                       {% if form.non_field_errors %}
                                     
-                      <small>
-                          {% for error in form.non_field_errors %}
-                              {{ error|escape }}
-                          {% endfor %}
-                      </small>
+                     
                           
                   {% endif %}
                     </div>
@@ -68,11 +64,7 @@
                       <input type="password" class="form-control form-control-user" id="id_password" name="password" placeholder="Contraseña">
                       {% if form.non_field_errors %}
                                     
-                      <small>
-                          {% for error in form.non_field_errors %}
-                              {{ error|escape }}
-                          {% endfor %}
-                      </small>
+                     
                           
                   {% endif %}
                     </div>
@@ -102,3 +94,10 @@
 
 {% endblock login %}
     
+  
+{% block js %}
+      <script>
+
+                       
+      </script>
+{% endblock js %}

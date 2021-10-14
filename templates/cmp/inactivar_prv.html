@@ -1,0 +1,84 @@
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+
+        <form action="" method="post" class="form-inline">
+            {% csrf_token %}
+            <div class="col-xl-12 col-md-12 mb-12">
+                <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 "><div class="alert">
+                            ¿Inactivar {% if obj.descripcion %} "{{ obj.descripcion }}" {% endif %} {% if obj.categoria%} de la categoria "{{ obj.categoria }}" {% endif %}
+                                {% if obj.nombre %} {{ obj.nombre }} {% endif %}?
+                        </div></div>
+                        <button type="button" id="btnInactivar"  class="btn btn-danger">Sí, eliminar</button>
+                            <button type="button" onclick="return cerrar_modal()" class="btn btn-warning">
+                                Cancelar
+                            </button>
+                        
+                    </div>
+                    <div class="col-auto">
+                        <i class="far fa-question-circle fa-2x text-gray-300"></i>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+  <script>
+      $(document).ready(function(){
+
+        var token = $('input[name=csrfmiddlewaretoken]').val();
+
+        $.ajaxSetup({
+            beforeSend: function (xhr,settings) {
+                if (!(/^http:,*/.test(settings.url) || /^https:.*/.test(settings.url))){
+                    xhr.setRequestHeader("X-CSRFToken", token);
+                }
+            }
+        });
+
+        $('#btnInactivar').click(function(e){
+
+            e.preventDefault();
+            
+
+            var id = {{ obj.id }};
+            var template = "{% url 'cmp:proveedor_inactivar' obj.id %}";
+            
+            var data = {"id":id};
+          
+
+            data = JSON.stringify(data);
+
+            $.ajax({
+                type: 'POST',
+                url : template,
+                data: data,
+                beforeSend: function(xhr, settings){
+                    $.ajaxSettings.beforeSend(xhr,settings);
+                },
+                success: function(response){
+                    console.log(response);
+                    cerrar_modal();
+                    // alert(response);
+                    var tipo = (response.startsWith('Proveedor no existe') ? 'red': 'green');
+                    mensaje(response, tipo)
+                },
+                error: function(jqXHR, textStatus, errorThrow){
+                    console.log(textStatus, errorThrow);
+                    mensaje(errorThrow, 'red')
+                    cerrar_modal();
+                }
+            });
+
+
+        });
+      });
+  </script>  

@@ -1,0 +1,59 @@
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+
+        
+        {% if obj %}
+        <form action="{% url 'cmp:proveedor_edit' obj.pk %}" role="form" method="post" class="form-inline">
+        
+        {% else %}
+        <form action="{% url 'cmp:proveedor_new' %}" role="form" method="post" class="form-inline">
+
+        {% endif %}
+            
+            {% csrf_token %}
+            <div class="col-xl-12 col-md-12 mb-12">
+                
+                {% if obj %}
+                <div class="card border-left-warning shadow h-100 py-2">
+                {% else %}
+                <div class="card border-left-success shadow h-100 py-2">
+
+                {% endif %}
+                    
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                
+                                {% if obj %}
+                                    Editar
+                                {% else %}
+                                    Nuevo
+                                {% endif %}
+                                    Proveedor
+                                </div>
+                                <div class="dropdwon-divider"></div>
+                                <div class="row my-3">
+                                    {{ form.as_p }}
+                                </div>
+                                <div class="dropdwon-divider"></div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+                                       
+                                        <button class="btn btn-danger" onclick="return cerrar_modal()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>  
+    
