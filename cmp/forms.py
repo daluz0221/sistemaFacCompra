@@ -13,12 +13,12 @@ class ProveedorForm(forms.ModelForm):
         widget = {'descripcion': forms.TextInput()}
 
         
-        def __init__(self, *args, **kwargs):
-            super(ProveedorForm, self).__init__(*args, **kwargs)
-            for field in iter(self.fields):
-                self.fields['field'].widget.attrs.update({
-                    'class': 'form-control'
-                })
+    def __init__(self, *args, **kwargs):
+        super(ProveedorForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
 
 
 class ComprasEncForm(forms.ModelForm):

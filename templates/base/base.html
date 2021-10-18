@@ -28,6 +28,13 @@
 
     <link href="{% static 'vendor/jquery-confirm/jquery-confirm.min.css' %}" rel="stylesheet">
 
+
+    <!-- Bootstrap-table -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body id="page-top" class="bg-gradient-primary">
@@ -111,6 +118,14 @@
               <a class="collapse-item" href="{% url 'cmp:proveedor_list' %}">Proveedores</a>
             
             {% endif %}
+
+            <h6 class="collapse-header">Catálogos de facturación</h6>
+
+            
+            {% if perms.fac.view_cliente %}
+              <a href="{% url 'fac:cliente_list' %}" class="collapse-item">Clientes</a>
+            {% endif %}
+              
           </div>
         </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras" aria-expanded="true" aria-controls="collapseTwo">
@@ -119,8 +134,12 @@
         </a>
         <div id="collapseCompras" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
+            
             <h6 class="collapse-header">Entradas</h6>
             <a href="{% url 'cmp:compras_list' %}" class="collapse-item">Compras</a>
+
+            <h6 class="collapse-header">Salidas</h6>
+            <a href="{% url 'fac:factura_list' %}" class="collapse-item">Facturas</a>
           </div>
         </div>
       </li>
@@ -487,6 +506,12 @@
 
   <!-- datetimepicker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script> 
+
+  <!-- bootstrap-table -->
+  <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table-locale-all.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
       
   <script>
     $(document).ready(function(){
